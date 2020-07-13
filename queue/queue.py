@@ -37,10 +37,12 @@ class Queue:
         self.storage = LinkedList() 
     
     def __len__(self):
-        pass
+        return self.size
 
     def enqueue(self, value):
-        pass
+        # return self.storage.insert(0, value)
+        self.size += 1
+        self.storage.insert(value)
 
     def dequeue(self):
         pass

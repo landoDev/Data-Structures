@@ -143,3 +143,13 @@ class LinkedList:
             # update the current node to the next node in the list
             current = current.get_next()
         return max_value
+
+    def insert(self, value):
+        new_node = Node(value)
+        if self.head is None:
+            self.head = value
+        next_head = self.head
+        new_node.next_node = next_head
+        self.head = value
+
+

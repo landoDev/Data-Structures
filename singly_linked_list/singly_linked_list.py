@@ -25,7 +25,7 @@ class Node:
     def set_next(self, new_next):
         # set this node's next_node reference to the passed in node
         self.next_node = new_next
-        
+
 class LinkedList:
     """
     Data:
@@ -98,6 +98,8 @@ class LinkedList:
 
         value = self.tail.get_value()
         self.tail = current
+        self.tail.set_next(None)
+
         return value
 
     def contains(self, value):

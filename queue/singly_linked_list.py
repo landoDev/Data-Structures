@@ -84,13 +84,13 @@ class LinkedList:
     def remove_tail(self):
         if not self.head:
             return None
-        
+
         if self.head is self.tail:
             value = self.head.get_value()
             self.head = None
             self.tail = None
             return value
-        
+
         current = self.head
 
         while current.get_next() is not self.tail:
@@ -99,8 +99,9 @@ class LinkedList:
         value = self.tail.get_value()
         self.tail = current
         self.tail.set_next(None)
-
         return value
+
+
 
     def contains(self, value):
         if not self.head:

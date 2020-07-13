@@ -45,7 +45,11 @@ class Queue:
         self.storage.insert(value)
 
     def dequeue(self):
-        pass
+        if self.size > 0:
+            self.size -= 1
+            return self.storage.remove_tail()
+        else:
+            return None
 
 
 # # class QueueNode:

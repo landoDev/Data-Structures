@@ -44,10 +44,6 @@ class Stack:
             node_marker = node_marker.next_node
         return node_count
 
-
-
-
-
     def push(self, value):
         # return self.storage.append(value)
         new_stack = StackNode(value)
@@ -65,12 +61,29 @@ class Stack:
         #     removed = self.storage.pop()
         #     print(self.storage)
         #     return removed
-        if self.head == None and self.tail == None:
+       
+        if not self.head:
             return None
-        else:
-            removed = self.head
-            self.head = self.head.next_node
-            removed.next_node = None
-            return removed
+        
+        # if self.head is self.tail:
+        #     value = self.head.get_value()
+        #     self.head = None
+        #     self.tail = None
+        #     return value
+        
+        current = self.head
+
+        while current.get_next() is not self.tail:
+            current = current.get_next()
+
+        value = self.tail.get_value()
+        self.tail = None
+        return value
+
+        # else:
+        #     removed = self.tail
+        #     self.head = self.head.next_node
+        #     removed.next_node = None
+        #     return removed
 
 

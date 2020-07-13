@@ -26,4 +26,3 @@ class Stack:
             removed = self.storage.pop()
             print(self.storage)
             return removed
-        

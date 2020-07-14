@@ -35,7 +35,7 @@ class DoublyLinkedList:
         # if it's empty 
         new_node = ListNode(value)
         self.length += 1
-        if self.head and self.tail is None:
+        if self.head is None and self.tail is None:
             # self.head = new_node
             # self.tail = new_node
             return DoublyLinkedList(new_node)
@@ -92,7 +92,15 @@ class DoublyLinkedList:
             # set new node's prev to current tail
             # set current tail's next to new node
             # set tail to the new node
-        pass
+        new_node = ListNode(value)
+        self.length += 1
+
+        if self.head and self.tail is None:
+            return DoublyLinkedList(new_node)
+        else:
+            current = self.tail
+            new_node.prev = current
+            self.tail = new_node            
             
     """
     Removes the List's current tail node, making the 

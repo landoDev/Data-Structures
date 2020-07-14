@@ -41,15 +41,17 @@ class Queue:
 
     def enqueue(self, value):
         # return self.storage.insert(0, value)
+        # return self.storage.append(value) ?
         self.size += 1
-        self.storage.insert(value)
+        self.storage.add_to_tail(value)
+        # self.storage.add_to_tail(value) ?
+        
 
     def dequeue(self):
-        if self.size > 0:
-            self.size -= 1
-            return self.storage.remove_tail()
-        else:
+        if self.size == 0:
             return None
+        self.size -= 1
+        return self.storage.remove_head()
 
 
 # # class QueueNode:

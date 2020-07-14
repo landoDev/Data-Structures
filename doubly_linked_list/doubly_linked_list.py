@@ -31,25 +31,22 @@ class DoublyLinkedList:
     def add_to_head(self, value):
         # create instance of ListNode with value
         # increment the DLL length
-        new_node = ListNode(value)
-        self.length += 1
         # check if the DLL is empty
         # if it's empty 
+        new_node = ListNode(value)
+        self.length += 1
         if self.head and self.tail is None:
-            #  set head and tail to the new node instance
-            self.head = new_node
-            self.tail = new_node
+            # self.head = new_node
+            # self.tail = new_node
+            return DoublyLinkedList(new_node)
         # if DLL not empty
         else:
             # set new node's next to current head
             current = self.head
             new_node.next = current
             # set head's prev to new node
-            self.head.prev = new_node.value
             # set head to the new node
             self.head = new_node
-
-        
     """
     Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -57,19 +54,27 @@ class DoublyLinkedList:
     """
     def remove_from_head(self):
         # store value of the head
+        removed = self.head
+        new_head = removed.next
         # decrement the length of DLL
+        self.length -= 1
         # delete the head
+        if new_head is not None:
             # if next is not None
-                # deal with next nodes prev value
-                # needs to point to the prev of the node being removed
                 # SET head.next prev to self's prev (ignores self node)
+            new_head.prev = None
                 # SET head to head.next
+            
+            self.head = new_head
                 # set self.tail to none ??
             # else (if head.next is None)
+        else:
+            self.head = None
+            self.tail = None
                 # set head to None
                 # set tail to None
         # return the value
-        pass
+        return removed
             
     """
     Wraps the given value in a ListNode and inserts it 

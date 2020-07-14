@@ -35,10 +35,9 @@ class DoublyLinkedList:
         # if it's empty 
         new_node = ListNode(value)
         self.length += 1
-        if self.head is None and self.tail is None:
-            # self.head = new_node
-            # self.tail = new_node
-            return DoublyLinkedList(new_node)
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
         # if DLL not empty
         else:
             # set new node's next to current head
@@ -54,17 +53,16 @@ class DoublyLinkedList:
     """
     def remove_from_head(self):
         # store value of the head
-        removed = self.head
-        new_head = removed.next
+        removed_head = self.head
         # decrement the length of DLL
         self.length -= 1
         # delete the head
-        if new_head is not None:
+        if removed_head.next is not None:
+            new_head = removed_head.next
             # if next is not None
                 # SET head.next prev to self's prev (ignores self node)
-            new_head.prev = None
+            new_head.prev = self.head.prev 
                 # SET head to head.next
-            
             self.head = new_head
                 # set self.tail to none ??
             # else (if head.next is None)
@@ -74,7 +72,7 @@ class DoublyLinkedList:
                 # set head to None
                 # set tail to None
         # return the value
-        return removed
+        return removed_head
             
     """
     Wraps the given value in a ListNode and inserts it 
@@ -95,8 +93,9 @@ class DoublyLinkedList:
         new_node = ListNode(value)
         self.length += 1
 
-        if self.head and self.tail is None:
-            return DoublyLinkedList(new_node)
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node
         else:
             current = self.tail
             new_node.prev = current
@@ -121,7 +120,24 @@ class DoublyLinkedList:
                 # set head to None
                 # set tail to None
         # return the value
-        pass
+
+        removed_tail = self.tail
+        # decrement the length of DLL
+        self.length -= 1
+        if removed_tail.prev is not None:
+            new_tail = removed_tail.prev
+            new_tail.next = self.head.next 
+                
+            self.tail = new_tail
+                # set self.tail to none ??
+            # else (if head.next is None)
+        else:
+            self.head = None
+            self.tail = None
+                # set head to None
+                # set tail to None
+        # return the value
+        return removed_tail
             
     """
     Removes the input node from its current spot in the 
@@ -149,4 +165,17 @@ class DoublyLinkedList:
     in the List.
     """
     def get_max(self):
-        pass
+        # initialize the head
+        current = self.head
+        next_node = self.head.next
+        max_value = self.head.value
+        # while there is a next value
+        while next_node is not None:
+            current_value = current.value
+             # compare that nodes value to max_value
+            if current_value > max_value:
+                 max_value = current_value
+            self.head = next_node
+            
+                
+        return max_value

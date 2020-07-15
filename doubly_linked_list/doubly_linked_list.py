@@ -9,6 +9,7 @@ class ListNode:
         self.next = next
 
     # call delete on the node instance itself to use in remove methods of list (?)
+    # I did not do this lol, I did it the hard way
             
 """
 Our doubly-linked list class. It holds references to 
@@ -194,9 +195,11 @@ class DoublyLinkedList:
     order of the other elements of the List.
     """
     def delete(self, node):
-        self.length -= 1
         if self.head is None and self.tail is None:
             return None
+
+        self.length -= 1
+        
         if self.head is self.tail:
             self.head = None
             self.tail = None

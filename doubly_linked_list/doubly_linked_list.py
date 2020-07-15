@@ -81,16 +81,7 @@ class DoublyLinkedList:
     the old tail node's next pointer accordingly.
     """
     def add_to_tail(self, value):
-        # create instance of ListNode with value
-        # increment the DLL length
-
-        # check if the DLL is empty
-        # if it's empty 
-            #  set head and tail to the new node instance
-        # if DLL not empty
-            # set new node's prev to current tail
-            # set current tail's next to new node
-            # set tail to the new node
+        
         new_node = ListNode(value)
         self.length += 1
 
@@ -109,19 +100,6 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_tail(self):
-        # store value of the tail
-        # decrement the length of DLL
-        # delete the tail
-            # if tail.prev is not None
-                # deal with prev nodes next value
-                # needs to point to the prev of the node being removed
-                # SET tail.prev next to None (ignores self node)
-                # SET tail to tail.prev
-                # set self.prev to none ??
-            # else (if tail.prev is None)
-                # set head to None
-                # set tail to None
-        # return the value
 
         removed_tail = self.tail
         # decrement the length of DLL
@@ -131,14 +109,11 @@ class DoublyLinkedList:
             new_tail.next = self.head.next 
                 
             self.tail = new_tail
-                # set self.tail to none ??
-            # else (if head.next is None)
+            
         else:
             self.head = None
             self.tail = None
-                # set head to None
-                # set tail to None
-        # return the value
+            
         return removed_tail.value
             
     """
@@ -219,7 +194,18 @@ class DoublyLinkedList:
     order of the other elements of the List.
     """
     def delete(self, node):
-        pass
+        self.length -= 1
+        if self.head is None and self.tail is None:
+            return None
+        if self.head is self.tail:
+            self.head = None
+            self.tail = None
+        elif self.head is node:
+            self.head = node.next
+            self.head.prev = None
+        else:
+            self.tail = node.prev
+            self.tail.prev = None
 
     """
     Finds and returns the maximum value of all the nodes 

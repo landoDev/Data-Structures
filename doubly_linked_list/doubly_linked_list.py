@@ -61,7 +61,7 @@ class DoublyLinkedList:
             new_head = removed_head.next
             # if next is not None
                 # SET head.next prev to self's prev (ignores self node)
-            new_head.prev = self.head.prev 
+            new_head.prev = None
                 # SET head to head.next
             self.head = new_head
                 # set self.tail to none ??
@@ -72,7 +72,7 @@ class DoublyLinkedList:
                 # set head to None
                 # set tail to None
         # return the value
-        return removed_head
+        return removed_head.value
             
     """
     Wraps the given value in a ListNode and inserts it 
@@ -137,7 +137,7 @@ class DoublyLinkedList:
                 # set head to None
                 # set tail to None
         # return the value
-        return removed_tail
+        return removed_tail.value
             
     """
     Removes the input node from its current spot in the 

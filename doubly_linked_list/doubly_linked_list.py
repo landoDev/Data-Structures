@@ -44,6 +44,7 @@ class DoublyLinkedList:
             current = self.head
             new_node.next = current
             # set head's prev to new node
+            current.prev = new_node
             # set head to the new node
             self.head = new_node
     """
@@ -144,8 +145,21 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List.
     """
     def move_to_front(self, node):
-        pass
-        
+        # set the current head
+        current = self.head
+        # loop until prev is none
+        while current.prev is not None:
+            # save the previous
+            next_node = self.head.prev
+            next_pointer = next_node.value
+            on_deck = next_node.prev
+            # may have to check if this is none
+            # set the moving node
+            moving_node = self.head
+            moving_node.prev = on_deck
+            moving_node.next = next_pointer
+            self.head = moving_node
+                 
     """
     Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List.

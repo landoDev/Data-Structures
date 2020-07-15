@@ -147,25 +147,71 @@ class DoublyLinkedList:
     def move_to_front(self, node):
         # set the current head
         current = self.head
-        # loop until prev is none
-        while current.prev is not None:
-            # save the previous
-            next_node = self.head.prev
-            next_pointer = next_node.value
-            on_deck = next_node.prev
-            # may have to check if this is none
-            # set the moving node
-            moving_node = self.head
-            moving_node.prev = on_deck
-            moving_node.next = next_pointer
+        moving_node = node
+        # if moving node has a next no prev
+        if moving_node.prev is None:
+            # return the node, already the head
+            return self.head
+        # if moving node has a prev and no next (end of the list)
+        elif moving_node.next is None:
+            # save value of the moving node
+            moving_node.prev.next = None
+            # set new node's next to current head
+            moving_node.next = current
+            # set head's prev to new node
+            current.prev = moving_node.value
+            # set head to the new node
             self.head = moving_node
+            self.tail = moving_node.prev
+        # if moving node has a next and prev
+        else:
+            # next to moving nodes prev
+            moving_node.prev.next = moving_node.next
+            # moving nodes next prev set to moving node prev
+            moving_node.next.prev = moving_node.prev
+            # set self.head to node
+            moving_node.next = current
+            # set head's prev to new node
+            current.prev = moving_node.value
+            # set head to the new node
+            self.head = moving_node
+
                  
     """
     Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List.
     """
     def move_to_end(self, node):
-        pass
+        # set the current tail
+        current = self.tail
+        moving_node = node
+        # if moving node has a prev no next
+        if moving_node.next is None:
+            # return the node, already the tail
+            return self.tail
+        # if moving node has a next and no prv (front of the list)
+        elif moving_node.prev is None:
+            # save value of the moving node
+            moving_node.next.prev = None
+            # set new node's prev to current tail
+            moving_node.prev = current
+            # set head's prev to new node
+            current.next = moving_node
+            # set head to the new node
+            self.tail = moving_node
+            self.head = moving_node.next
+        # if moving node has a next and prev
+        else:
+            # next to moving nodes prev
+            moving_node.prev.next = moving_node.next
+            # moving nodes next prev set to moving node prev
+            moving_node.next.prev = moving_node.prev
+            # set self.head to node
+            moving_node.prev = current
+            # set head's prev to new node
+            current.next = moving_node.value
+            # set head to the new node
+            self.tail = moving_node
 
     """
     Deletes the input node from the List, preserving the 
@@ -188,8 +234,5 @@ class DoublyLinkedList:
             current_value = current.value
              # compare that nodes value to max_value
             if current_value > max_value:
-                 max_value = current_value
-            self.head = next_node
-            
-                
+                 max_value = current_value         
         return max_value

@@ -96,6 +96,8 @@ class BSTNode:
             self.right.for_each(fn)
         # otherwise do nothing else
 
+    def __repr__(self):
+        return f"{self.value}"
 
     # Part 2 -----------------------
 
@@ -123,13 +125,14 @@ class BSTNode:
         # if current node is none
         # end of a recursion
         # (base case) return
+        print("print ran")
         if node is None:
             return 
             
         
         # check if we can move left
         if self.left is not None:
-            self.in_order_print(node.left)
+            self.left.in_order_print(node.left)
         
         # visit the node by printing it's value
         print(node.value)

@@ -66,15 +66,21 @@ class BSTNode:
         # will only need the right side
         # iterate through the nodes using a loop constuct
         # if there isn't a right node return this value
-        current = self
-        max_value = self.value
-        if current.right is None:
-            return current.value
-        else:
-            while current.right:
-                current = current.right
-                max_value = current.value
-        return max_value                
+        # my original solution
+        # current = self
+        # max_value = self.value
+        # if current.right is None:
+        #     return current.value
+        # else:
+        #     while current.right:
+        #         current = current.right
+        #         max_value = current.value
+        # return max_value 
+
+        # recursive approach
+        if self.right is None:
+            return self.value
+        return self.right.get_max()               
 
 
     # Call the function `fn` on the value of each node
@@ -93,20 +99,102 @@ class BSTNode:
 
     # Part 2 -----------------------
 
+    # USE ENQUEUE AND DEQUEUE METHODS (import them?)
+    # stretch goal:
+        # #preorder (postorder is opposite)
+
+        # #visit logic
+        # print(self.value)
+        # # recurse left
+        # self.left.fn()
+        # # recurse right
+        # self.right.fn()
+
+        # #inorder
+        # # recurse left
+        # self.left.fn()
+        # #visit logic
+        # print(self.value)
+        # # recurse right
+        # self.right.fn()
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        # if current node is none
+        # end of a recursion
+        # (base case) return
+        if node is None:
+            return 
+            
+        
+        # check if we can move left
+        if self.left is not None:
+            self.in_order_print(node.left)
+        
+        # visit the node by printing it's value
+        print(node.value)
+
+        # check if we can "move right"
+        if self.right is not None:
+            self.right.in_order_print(node.right)
+
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
-        pass
+        from queue import Queue
+        # use a queue to form a "line"
+        # for the nodes to "get in"
+        q = Queue()
+        # start by placing the root in the queue
+        q.enqueue(self)
+        # need a while loop to iterate!!!
+        # checking for: 
+        # while length of queue is greater than 0 
+        while q.size > 0:
+            # dequeue item from item front of queue
+            node = q.dequeue()
+            # print that item
+            print(node.value)
+            # place left node in queue if not None
+            if self.left is not None:
+                next_node = self.left
+                q.enqueue(next_node)
+            # place right node in queue if not None
+            if self.right is not None:
+                next_node = self.right
+                q.enqueue(next_node)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+   
+    
     def dft_print(self, node):
-        pass
+        from stack import Stack
+        # stack 
+        # initialize an empty stack
+        ref_stack = Stack()
+        # push a root node onto the stack
+        ref_stack.push(self)
+        # need a while loop to manage the iteration
+        # check for:
+        # if stack is not empty, enter the while loop
+        while ref_stack.size > 0:
+            # pop top item off the stack
+            this_node = ref_stack.pop()
+            # print that item's value
+            print(this_node)
+            # if there is a right subtree
+            # push right item onto the stack
+            if self.right is not None:
+                ref_stack.push(self.right.value)
+
+            # if there is a left subtree
+                # push left item onto the stack
+            if self.left is not None:
+                ref_stack.push(self.left.value)
 
     # Stretch Goals -------------------------
     # Note: Research may be required

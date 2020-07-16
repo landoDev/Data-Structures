@@ -125,21 +125,27 @@ class BSTNode:
         # if current node is none
         # end of a recursion
         # (base case) return
-        print("print ran")
-        if node is None:
+
+        # google fu attempt also failed
+        # if node:
+        #     self.in_order_print(node.left)
+        #     print(node.value)
+        #     self.in_order_print(node.right)
+
+        if self is None:
             return 
             
         
         # check if we can move left
         if self.left is not None:
-            self.left.in_order_print(node.left)
+            self.left.in_order_print(self.left)
         
         # visit the node by printing it's value
         print(node.value)
 
         # check if we can "move right"
         if self.right is not None:
-            self.right.in_order_print(node.right)
+            self.right.in_order_print(self.right)
 
 
 
